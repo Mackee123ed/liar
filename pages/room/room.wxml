@@ -1,0 +1,7 @@
+<!--pages/room/room.wxml-->
+<view class="room">
+  <view wx:for="{{seats}}" wx:key="seatId" class="seat" bindtap="selectSeat" data-seat-id="{{item.seatId}}">
+    <image wx:if="{{item.user}}" src="{{item.user.avatarUrl}}" style="width: 40px; height: 40px;"></image>
+    <text wx:else>空位 {{item.seatId}}</text>
+  </view>
+</view>

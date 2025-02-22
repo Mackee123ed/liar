@@ -1,0 +1,38 @@
+<!-- pages/game/game.wxml -->
+<view wx:if="{{gameState === 'setup'}}">
+  <text>等待玩家加入...</text>
+  <view wx:for="{{players}}" wx:key="id">{{item.name}}</view>
+</view>
+
+<view wx:if="{{gameState === 'voting'}}">
+  <text>当前词汇: {{word}}</text>
+  <button>开始游戏</button> <!-- 触发投票逻辑 -->
+</view>
+
+<view wx:if="{{gameState === 'definition'}}">
+  <text>词汇: {{word}}</text>
+  <input wx:if="{{role !== 'smart'}}" bindconfirm="submitDefinition" data-player-id="{{playerId}}" placeholder="输入你的定义" />
+  <text wx:else>等待其他人提交定义...</text>
+</view>
+
+<view wx:if="{{gameState === 'speaking'}}">
+  <text>玩家定义:</text>
+  <view wx:for="{{definitions}}" wx:key="playerId">{{item.playerId}}: {{item.content}}</view>
+</view>
+
+<view wx:if="{{gameState === 'guessing'}}" wx:if="{{role === 'smart'}}">
+  <text>选择瞎掰人:</text>
+  <picker range="{{players}}" range-key="name" bindchange="selectFibber">
+    <view>{{selectedFibber || '选择'}}</view>
+  </picker>
+  <text>选择老实人:</text>
+  <picker range="{{players}}" range-key="name" bindchange="selectHonest">
+    <view>{{selectedHonest || '选择'}}</view>
+  </picker>
+  <button bindtap="submitGuess">提交猜测</button>
+</view>
+
+<view wx:if="{{gameState === 'scoring'}}">
+  <text>本轮得分:</text>
+  <view wx:for="{{players}}" wx:key="id">{{item.name}}: {{scores[item.id] || 0}}</view>
+</view>

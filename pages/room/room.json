@@ -1,0 +1,8 @@
+{
+  "_id": "room_001", 
+  "seats": [
+    { "seatId": 1, "user": { "nickName": "用户1", "avatarUrl": "url1" } },
+    { "seatId": 2, "user": null },
+    { "seatId": 3, "user": null }
+  ]
+}

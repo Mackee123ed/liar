@@ -1,0 +1,7 @@
+<view wx:if="{{!isAuthorized}}">
+  <button bindtap="getUserInfo">授权并进入房间</button>
+</view>
+<view wx:else>
+  <text>欢迎 {{userInfo.nickName}}</text>
+  <image src="{{userInfo.avatarUrl}}" style="width: 50px; height: 50px;"></image>
+</view>
