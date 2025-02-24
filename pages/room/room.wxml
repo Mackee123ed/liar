@@ -1,7 +1,14 @@
-<!--pages/room/room.wxml-->
+<!-- pages/room/room.wxml -->
 <view class="room">
+  <!-- 座位列表 -->
   <view wx:for="{{seats}}" wx:key="seatId" class="seat" bindtap="selectSeat" data-seat-id="{{item.seatId}}">
-    <image wx:if="{{item.user}}" src="{{item.user.avatarUrl}}" style="width: 40px; height: 40px;"></image>
-    <text wx:else>空位 {{item.seatId}}</text>
+    <!-- 如果座位有用户，显示用户信息和座位号 -->
+    <view wx:if="{{item.user}}" class="seat-occupied">
+      <text class="seat-info">座位 {{item.seatId}} (已占用)</text>
+    </view>
+    <!-- 如果座位为空，显示空位提示 -->
+    <view wx:else class="seat-empty">
+      <text class="seat-info">座位 {{item.seatId}}</text>
+    </view>
   </view>
 </view>
