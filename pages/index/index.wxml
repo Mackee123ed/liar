@@ -1,7 +1,36 @@
-<view wx:if="{{!isAuthorized}}">
-  <button bindtap="getUserInfo">授权并进入房间</button>
-</view>
-<view wx:else>
-  <text>欢迎 {{userInfo.nickName}}</text>
-  <image src="{{userInfo.avatarUrl}}" style="width: 50px; height: 50px;"></image>
+<!-- pages/index/index.wxml -->
+<view class="container">
+  <!-- 游戏标题 -->
+  <view class="game-title">欢乐游戏大厅</view>
+
+  <!-- 用户信息展示 -->
+  <view class="user-card" wx:if="{{isAuthorized}}">
+    <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+    <text class="nickname">{{userInfo.nickName}}</text>
+  </view>
+
+  <!-- 授权按钮 -->
+  <button 
+    wx:if="{{!isAuthorized}}"
+    class="auth-btn" 
+    bindtap="getUserInfo"
+  >
+    <image class="icon" src="/images/wechat-login.png"></image>
+    微信登录
+  </button>
+
+  <!-- 开始游戏按钮 -->
+  <button 
+    wx:if="{{isAuthorized}}"
+    class="start-btn" 
+    bindtap="enterRoom"
+  >
+    开始游戏
+  </button>
+
+  <!-- 游戏公告 -->
+  <!-- <view class="announcement">
+    <text class="title">游戏公告</text>
+    <text class="content">当前版本：1.0.0\n在线玩家：{{onlineCount}}人</text>
+  </view> -->
 </view>

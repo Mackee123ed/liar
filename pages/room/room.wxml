@@ -1,14 +1,37 @@
 <!-- pages/room/room.wxml -->
-<view class="room">
+<view class="container">
   <!-- 座位列表 -->
-  <view wx:for="{{seats}}" wx:key="seatId" class="seat" bindtap="selectSeat" data-seat-id="{{item.seatId}}">
-    <!-- 如果座位有用户，显示用户信息和座位号 -->
-    <view wx:if="{{item.user}}" class="seat-occupied">
-      <text class="seat-info">座位 {{item.seatId}} (已占用)</text>
+  <view class="room">
+    <view 
+      wx:for="{{seats}}" 
+      wx:key="seatId" 
+      class="seat" 
+      bindtap="selectSeat" 
+      data-seat-id="{{item.seatId}}"
+      style="background: {{item.user ? (item.user === userId ? '#4CAF50' : '#FF5722') : '#EEE'}}"
+    >
+      <!-- 准备状态标识 -->
+      <view wx:if="{{item.isReady}}" class="ready-tag">已准备</view>
+      
+      <view wx:if="{{item.user}}" class="seat-content">
+        <text class="username">{{item.user === userId ? '我' : item.user}}</text>
+        <text class="seat-id">#{{item.seatId}}</text>
+      </view>
+      
+      <view wx:else class="seat-content">
+        <text class="seat-id">#{{item.seatId}}</text>
+        <text class="hint-text">点击入座</text>
+      </view>
     </view>
-    <!-- 如果座位为空，显示空位提示 -->
-    <view wx:else class="seat-empty">
-      <text class="seat-info">座位 {{item.seatId}}</text>
-    </view>
+  </view>
+
+  <!-- 准备按钮 -->
+  <view class="ready-btn-container">
+    <button 
+  class="ready-btn {{mySeat !== null && seats[mySeat].isReady ? 'ready' : ''}}" 
+  bindtap="toggleReady"
+>
+  {{mySeat !== null && seats[mySeat].isReady ? '已准备' : '点击准备'}}
+</button>
   </view>
 </view>

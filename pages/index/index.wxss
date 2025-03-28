@@ -1,62 +1,98 @@
-/**index.wxss**/
-page {
+/* pages/index/index.wxss */
+.container {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-.scrollarea {
-  flex: 1;
-  overflow-y: hidden;
-}
-
-.userinfo {
+  background: linear-gradient(180deg, #4B79A1 0%, #283E51 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #aaa;
-  width: 80%;
+  padding: 40rpx;
 }
 
-.userinfo-avatar {
-  overflow: hidden;
-  width: 128rpx;
-  height: 128rpx;
-  margin: 20rpx;
-  border-radius: 50%;
+.game-title {
+  font-size: 48rpx;
+  color: #fff;
+  text-shadow: 0 4rpx 8rpx rgba(0,0,0,0.2);
+  margin: 80rpx 0;
 }
 
-.usermotto {
-  margin-top: 200px;
-}
-
-.avatar-wrapper {
-  padding: 0;
-  width: 56px !important;
-  border-radius: 8px;
-  margin-top: 40px;
-  margin-bottom: 40px;
+.user-card {
+  background: rgba(255,255,255,0.1);
+  border-radius: 32rpx;
+  padding: 30rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 60rpx;
+  backdrop-filter: blur(10px);
 }
 
 .avatar {
-  display: block;
-  width: 56px;
-  height: 56px;
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+  border: 4rpx solid #fff;
 }
 
-.nickname-wrapper {
+.nickname {
+  font-size: 36rpx;
+  color: #fff;
+  max-width: 400rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.auth-btn, .start-btn {
+  width: 80%;
+  height: 100rpx;
+  border-radius: 50rpx;
+  font-size: 36rpx;
+  color: #fff;
+  margin: 40rpx 0;
   display: flex;
-  width: 100%;
-  padding: 16px;
-  box-sizing: border-box;
-  border-top: .5px solid rgba(0, 0, 0, 0.1);
-  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
-  color: black;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
 }
 
-.nickname-label {
-  width: 105px;
+.auth-btn {
+  background: #07C160;
+  box-shadow: 0 8rpx 16rpx rgba(7,193,96,0.3);
 }
 
-.nickname-input {
-  flex: 1;
+.start-btn {
+  background: #FF5722;
+  box-shadow: 0 8rpx 16rpx rgba(255,87,34,0.3);
+}
+
+.auth-btn:active, .start-btn:active {
+  transform: scale(0.95);
+}
+
+.icon {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 20rpx;
+}
+
+.announcement {
+  position: fixed;
+  bottom: 80rpx;
+  width: 80%;
+  background: rgba(255,255,255,0.1);
+  border-radius: 24rpx;
+  padding: 30rpx;
+}
+
+.title {
+  display: block;
+  font-size: 32rpx;
+  color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.content {
+  font-size: 28rpx;
+  color: rgba(255,255,255,0.8);
+  white-space: pre-wrap;
 }

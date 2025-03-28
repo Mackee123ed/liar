@@ -1,15 +1,89 @@
+/* pages/room/room.wxss */
+.container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 120rpx; /* 给按钮留出空间 */
+}
+
 .room {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  padding: 20rpx;
+  gap: 20rpx; /* 现代浏览器支持的间距属性 */
 }
+
 .seat {
-  width: 80px;
-  height: 80px;
-  margin: 10px;
-  background: #f0f0f0;
+  width: calc(33.333% - 14rpx); /* 精确计算三列间距 */
+  height: 240rpx;
+  border-radius: 16rpx;
   display: flex;
-  align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  align-items: center;
+  position: relative;
+}
+
+.seat-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.username {
+  font-size: 28rpx;
+  color: #333;
+  /* 关键修正点 */
+  max-width: 100%; /* 改为百分比控制 */
+  min-width: 0; /* 解决flex布局下的压缩问题 */ 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* 布局增强 */
+  display: inline-block; /* 改为行内块元素 */
+  padding: 0 10rpx; /* 添加内边距 */
+  box-sizing: border-box;
+}
+
+.seat-id {
+  font-size: 28rpx;
+  color: rgba(0,0,0,0.6);
+}
+
+.hint-text {
+  font-size: 24rpx;
+  color: #666;
+  margin-top: 10rpx;
+}
+
+/* 准备状态标识 */
+.ready-tag {
+  position: absolute;
+  right: 10rpx;
+  bottom: 10rpx;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 4rpx 12rpx;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+}
+
+/* 准备按钮样式 */
+.ready-btn-container {
+  position: fixed;
+  right: 40rpx;
+  bottom: 40rpx;
+}
+
+.ready-btn {
+  width: 200rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  background: #2196F3;
+  color: white;
+  font-size: 28rpx;
+  transition: all 0.3s;
+}
+
+.ready-btn.ready {
+  background: #4CAF50;
 }

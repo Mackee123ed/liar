@@ -1,30 +1,63 @@
 // pages/index/index.js
 Page({
   data: {
-    userInfo: null, // 存储用户信息
-    isAuthorized: false // 是否已授权
+    userInfo: null,
+    isAuthorized: false,
+    onlineCount: 0
   },
+
+  onLoad() {
+    this.getOnlineCount();
+  },
+
+  // 获取在线人数（模拟）
+  getOnlineCount() {
+    setTimeout(() => {
+      this.setData({ onlineCount: Math.floor(Math.random() * 1000) })
+    }, 500)
+  },
+
   // 获取用户信息
   getUserInfo() {
+    if (typeof wx.getUserProfile !== 'function') {
+      wx.showToast({ title: '请升级微信版本', icon: 'none' })
+      return
+    }
+
     wx.getUserProfile({
-      desc: '用于展示您的头像和昵称', // 授权提示
+      desc: '用于游戏内展示',
       success: (res) => {
         this.setData({
-          userInfo: res.userInfo, // 包含 nickName 和 avatarUrl
+          userInfo: res.userInfo,
           isAuthorized: true
-        });
-        wx.showToast({ title: '授权成功', icon: 'success' });
-        this.enterRoom(); // 授权成功后进入房间
+        })
+        wx.setStorageSync('userInfo', res.userInfo)
       },
-      fail: () => {
-        wx.showToast({ title: '授权失败', icon: 'none' });
+      fail: (err) => {
+        console.error('授权失败:', err)
+        wx.showToast({ title: '授权失败', icon: 'none' })
       }
-    });
+    })
   },
-  // 进入房间逻辑
+
+  // 进入游戏
   enterRoom() {
+    if (!this.data.isAuthorized) {
+      wx.showToast({ title: '请先登录', icon: 'none' })
+      return
+    }
+
+    wx.showLoading({ title: '加载中...' })
     wx.navigateTo({
-      url: '/pages/room/room' // 跳转到房间页面
-    });
+      url: '/pages/room/room',
+      success: () => {
+        wx.hideLoading()
+      },
+      fail: (err) => {
+        wx.hideLoading()
+        wx.showToast({ title: '进入失败', icon: 'none' })
+        console.error('跳转失败:', err)
+      }
+    })
   }
-});
+})
